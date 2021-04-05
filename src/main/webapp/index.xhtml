@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <META http-equiv="Cache-Control" content="no-cache"/> 
+            <META HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
+            <META HTTP-EQUIV="Expires" CONTENT="-1"/>
+        </f:facet>
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+        <!--<h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>-->
+        <style type="text/css">
+            .ui-panel, div.ui-state-hover {
+                margin: 10px;
+                width: 200px;
+            }
+
+            .ui-dashboard-column {
+                width: 220px;
+            }
+            .ui-layout-unit-header {
+                text-align: center;
+            }
+        </style>
+
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="10000" showDetail="true" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="200" header="YAMALE" >
+                <ui:include src="partials/menu.xhtml" />
+            </p:layoutUnit>
+            <p:layoutUnit position="center" >
+                <!--                <p>
+                                    this is my first paragraph .It describe the website fonction 
+                                </p>
+                                <p:dashboard model="#{bean.model}">
+                                    <p:panel id="sports">
+                                        //Sports Content
+                                    </p:panel>
+                                    <p:panel id="finance">
+                                        //Finance Content
+                                    </p:panel>
+                                    //more panels like lifestyle, weather, politics...
+                                </p:dashboard>-->
+                <p:layout>
+                    <p:layoutUnit position="north" size="140" header="BIENVENUE SUR A LA YAMALE">
+                        <h2 align="center">YAMALE! UNE PLATEFORME DE GESTION DU PLAN DE CHARGE</h2>  
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center" >
+                        <div class="card">
+                            <h:form>
+                                <p:growl id="msgs" showDetail="true" />
+
+                                <p:dashboard id="board" model="#{dashboardView.model}" >
+                                    <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs"/>
+
+                                    <p:panel id="sports" header="SITES">
+                                        <h:link value="Foot Ball"/><br/>
+                                        <h:link value="Basket Ball"/><br/>
+                                        <h:link value="Volley Ball"/><br/>
+                                        <h:link value="Hand Ball"/><br/>      
+                                    </p:panel>
+
+                                    <p:panel id="finance" header="MESSAGES">
+                                        <h:link value="Personnel"/><br/>
+                                        <h:link value="Discussion"/><br/>
+                                        <h:link value="Chat"/><br/>
+                                        <h:link value="Bouillon"/><br/>
+                                    </p:panel>
+
+                                    <p:panel id="lifestyle" header="STATISTIQUES">
+                                        <h:link value="Dourbe"/><br/>
+                                        <h:link value="Diagramme"/><br/>
+                                        <h:link value="Diagramme a bande"/><br/>
+                                        <h:link value="Diagramme a barre"/><br/>
+                                    </p:panel>
+
+                                    <p:panel id="weather" header="UTILISATEURS">
+                                        <h:link value="Administrateur"/><br/>
+                                        <h:link value="Utilisateur simple"/><br/>
+                                        <h:link value="Utilisateur normale"/><br/>
+                                        <h:link value="Utilisateur "/><br/>
+                                    </p:panel>
+
+                                    <p:panel id="politics" header="PLAN DE CHARGE">
+                                        <h:link value="Gestion"/><br/>
+                                        <h:link value="Gestion informatique"/><br/>
+                                        <h:link value="Finance"/><br/>
+                                        <h:link value="Gestion RH"/><br/>
+                                    </p:panel>
+                                </p:dashboard>
+
+                                <div style="clear:both"/>
+                            </h:form>
+                        </div>
+                        
+                    </p:layoutUnit>
+
+                </p:layout>
+
+
+
+
+
+
+            </p:layoutUnit>
+
+
+            <p:layoutUnit position="south" size="60">
+                <p>©opyright 2020 ckroot All reserved</p>
+            </p:layoutUnit>
+
+
+
+            <p:layoutUnit position="west" size="400" header="CONFIGURATION" collapsible="true" resizable="true" >
+                <p:accordionPanel>  
+                    <p:tab title="Calendrier">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:calendar value="#{dateController.date}" locale="tr" navigator="true" mode="inline"
+                                        showButtonPanel="true"/>
+                        </h:panelGrid>  
+                    </p:tab>  
+                    <p:tab title="Plan de charge">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:graphicImage name="images/courses/spring.png" />  
+                            <h:outputText value="Cette partie défini le plan de charge" />  
+                        </h:panelGrid>  
+                    </p:tab>  
+                    <p:tab title="Notifications">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:graphicImage name="images/courses/python.png" />  
+                            <h:outputText value="On définit dans cette section les notifications" />  
+                        </h:panelGrid>  
+                    </p:tab>  
+                </p:accordionPanel>  
+            </p:layoutUnit>
+
+
+            <p:layoutUnit position="east" header="MENU STATISTIQUE" size="250" collapsible="true">
+                <p:accordionPanel>  
+                    <p:tab title="Pie Chart">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <!--                            <p:graphicImage name="images/courses/java.png" />  -->
+                            <h:outputText  
+                                value="This program includes Java core concepts and collection framework." />  
+                        </h:panelGrid>  
+                    </p:tab>  
+                    <p:tab title="Graphic">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:graphicImage name="images/courses/spring.png" />  
+                            <h:outputText value="It is a Java Framework. It is designed to make web applications." />  
+                        </h:panelGrid>  
+                    </p:tab>  
+                    <p:tab title="Bar">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:graphicImage name="images/courses/python.png" />  
+                            <h:outputText value="It is a multipurpose programming language. provides extensive tools." />  
+                        </h:panelGrid>  
+                    </p:tab>
+                    <p:tab title="Histogram">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:graphicImage name="images/courses/python.png" />  
+                            <h:outputText value="It is a multipurpose programming language. provides extensive tools." />  
+                        </h:panelGrid>  
+                    </p:tab>
+                </p:accordionPanel>  
+            </p:layoutUnit>
+
+        </p:layout>
+
+
+
+    </h:body>
+</html>
+
